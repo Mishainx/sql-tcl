@@ -6,10 +6,10 @@ START TRANSACTION$$
 
 DELETE FROM pacientes
 WHERE id_paciente <5$$
-ROLLBACK$$
--- COMMIT$$
+ROLLBACK$$ -- Sentencia rollback para deshacer los cambios
+-- COMMIT$$ -- Senetncia commit para concretar el cambio
 
-SELECT * FROM pacientes$$
+-- SELECT * FROM pacientes para comprobar si impactaron los cambios o no
 
 START TRANSACTION $$
 INSERT INTO consultorio.turnos (id_paciente, id_tratamiento, id_profesional, fecha) VALUES
@@ -24,6 +24,8 @@ INSERT INTO consultorio.turnos (id_paciente, id_tratamiento, id_profesional, fec
 (10, 3, 10, '2023-07-24 14:30:00'),
 (11, 4, 1, '2023-07-25 10:00:00'),
 (12, 5, 2, '2023-07-25 11:30:00')$$
+
+SAVEPOINT lote_2$$
 
 RELEASE SAVEPOINT lote_1$$
 -- ROLLBACK TO lote_1$$
